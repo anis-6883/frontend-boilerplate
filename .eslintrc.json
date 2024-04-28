@@ -1,0 +1,14 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:@next/next/recommended"],
+  "rules": {
+    "semi": ["error", "always"],
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "@next/next/no-img-element": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "import/no-anonymous-default-export": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/no-unknown-property": "error",
+    "jsx-a11y/alt-text": "off"
+  }
+}
