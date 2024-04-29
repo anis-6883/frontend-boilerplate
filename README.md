@@ -1,2 +1,1 @@
 # Next.js Frontend Boilerplate
-

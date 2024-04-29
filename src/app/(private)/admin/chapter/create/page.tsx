@@ -12,7 +12,7 @@ const pageHeader = {
     },
     {
       href: routes.admin.chapter.home,
-      name: "Chapter",
+      name: "Chapter"
     },
     {
       name: "Create"
@@ -21,7 +21,7 @@ const pageHeader = {
 };
 
 export const metadata = {
-  ...metaObject("Chapter",)
+  ...metaObject("Chapter")
 };
 
 export default function Page() {

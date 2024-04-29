@@ -1,17 +1,16 @@
 "use client";
 
-import Button from "@/components/shared/Button/Button";
-import Input from "@/components/shared/Form/Input";
 import { routes } from "@/config/routes";
 import { useAdminLoginMutation } from "@/features/auth/authApi";
 import { setValue } from "@/features/auth/authSlice";
-import hitToast from "@/utils/hitToast";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { ImSpinner9 } from "react-icons/im";
+import { LuMail, LuUnlock } from "react-icons/lu";
 import { useDispatch } from "react-redux";
-import { Password } from "rizzui";
+import { Button, Input, Password } from "rizzui";
 import * as Yup from "yup";
 
 export default function AdminLoginForm() {
@@ -29,17 +28,24 @@ export default function AdminLoginForm() {
     password: Yup.string().required("Required!")
   });
 
-  const [adminLogin, { data: loginResponse, isSuccess: loginSuccess, isError: loginError }] = useAdminLoginMutation();
+  const [adminLogin, { data: loginResponse, isSuccess: loginSuccess, isError: isLoginError, error: loginError }] = useAdminLoginMutation();
 
   // Handle Login Response
   useEffect(() => {
-    if (loginError) {
+    if (isLoginError) {
       setSubmitting(false);
-      toast.error("Something went wrong! Try Again");
+      if ("status" in loginError) {
+        if (loginError.status === 401) {
+          toast.error("Invalid Credentials!");
+        } else {
+          toast.error("Something went wrong! Try Again...");
+        }
+      }
     }
+
     if (loginSuccess) {
       if (loginResponse?.status) {
-        hitToast("success", "Login Success");
+        toast.success("Login Successful!");
         console.log(loginResponse);
         dispatch(setValue({ target: "user", value: loginResponse.data }));
         replace(routes.admin.dashboard);
@@ -62,38 +68,70 @@ export default function AdminLoginForm() {
 
   return (
     <Formik initialValues={initialValues} validationSchema={loginSchema} onSubmit={handleSubmit}>
-      {({}) => {
+      {() => {
         return (
           <Form>
-            <Input name='email' required size='lg' />
+            <Field name='email'>
+              {({ field, meta }: { field: any; meta: any }) => (
+                <div className='mt-3'>
+                  <Input
+                    size='lg'
+                    label={
+                      <p className='flex items-center gap-x-2'>
+                        <LuMail className='text-base' />
+                        Email
+                        <span className='font-bold text-red-600'> *</span>
+                      </p>
+                    }
+                    variant='outline'
+                    color='primary'
+                    labelClassName='text-base'
+                    autoComplete='off'
+                    placeholder={"john@example.com"}
+                    {...field}
+                  />
+                  {meta.touched && meta.error && <p className='mt-1 select-none px-1 font-medium text-red'>{meta.error}</p>}
+                </div>
+              )}
+            </Field>
             <Field name='password'>
               {({ field, meta }: { field: any; meta: any }) => (
                 <div className='mt-3'>
                   <Password
                     size='lg'
                     label={
-                      <span className='font-semibold mb-1'>
-                        <span>Password</span>
-                        <span className='text-red-600 font-bold'>
-                          {" "}
-                          * <ErrorMessage name={"password"} />
-                        </span>
-                      </span>
+                      <p className='flex items-center gap-x-2'>
+                        <LuUnlock className='text-base' /> Password
+                        <span className='font-bold text-red-600'> *</span>
+                      </p>
                     }
+                    variant='outline'
                     color='primary'
+                    labelClassName='text-base'
                     autoComplete='off'
-                    placeholder='Password'
+                    placeholder='********'
                     {...field}
                   />
+                  {meta.touched && meta.error && <p className='mt-1 select-none px-1 font-medium text-red'>{meta.error}</p>}
                 </div>
               )}
             </Field>
-            <Button
-              text={"Login"}
-              isLoading={submitting}
-              className='btn-primary flex justify-center items-center py-2 w-full mt-3'
-              type='submit'
-            />
+            <div className='mt-5 justify-end'>
+              <Button
+                color='primary'
+                type='submit'
+                className='disabled:bg-[#dae7ff] disabled:text-[#5d98fd] flex w-full items-center justify-center font-semibold'
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <span className='flex items-center gap-x-2'>
+                    Requesting... <ImSpinner9 className='animate-spin text-base' />
+                  </span>
+                ) : (
+                  <span>Login</span>
+                )}
+              </Button>
+            </div>
           </Form>
         );
       }}

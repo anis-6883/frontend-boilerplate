@@ -1,6 +1,6 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { ISongBook } from "@/types";
-import hitToast from "@/utils/hitToast";
+import hotToast from "@/utils/hotToast";
 import { addSongBook, deleteSongBook, setValue, updateSongBook } from "./songBookReducer";
 
 const songBookApi = apiSlice.injectEndpoints({
@@ -49,10 +49,10 @@ const songBookApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addSongBook(data.newSongBook));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -71,10 +71,10 @@ const songBookApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateSongBook(data.updatedSongBook));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -92,10 +92,10 @@ const songBookApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deleteSongBook({ id: data.deletedSongBook.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })

@@ -1,6 +1,6 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { IQaCategory } from "@/types";
-import hitToast from "@/utils/hitToast";
+import hotToast from "@/utils/hotToast";
 import { addQaCategory, deleteQaCategory, setValue, updateQaCategory } from "./qaCategoryReducer";
 
 const qaCategoryApi = apiSlice.injectEndpoints({
@@ -49,10 +49,10 @@ const qaCategoryApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addQaCategory(data.newQaCategory));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -71,10 +71,10 @@ const qaCategoryApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateQaCategory(data.updatedQaCategory));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -92,10 +92,10 @@ const qaCategoryApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deleteQaCategory({ id: data.deletedQaCategory.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })

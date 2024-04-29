@@ -8,7 +8,6 @@ import { LOADING_DATA } from "@/config/constants";
 import { IChapter } from "@/types";
 import { useDeleteChapterMutation, useGetChaptersQuery } from "@/features/chapter/chapterApi";
 
-
 export default function ChapterTable() {
   const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,

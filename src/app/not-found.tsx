@@ -1,23 +1,20 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Title, Button } from "rizzui";
 import { PiHouseLineBold } from "react-icons/pi";
-import { siteConfig } from "@/config/site.config";
-import NotFoundImg from "@public/not-found.png";
+import { Button, Title } from "rizzui";
 
 export default function NotFound() {
   return (
     <div className='flex min-h-screen flex-col bg-[#F8FAFC]'>
       <div className='sticky top-0 z-40 flex justify-center py-5 backdrop-blur-lg lg:backdrop-blur-none xl:py-10'>
-        <Link href='/'>
+        {/* <Link href='/'>
           <Image src={siteConfig.logo} alt={siteConfig.title} className='dark:invert' priority />
-        </Link>
+        </Link> */}
       </div>
 
       <div className='flex grow items-center px-6 xl:px-10'>
         <div className='mx-auto text-center'>
-          <Image
-            src={NotFoundImg}
+          <img
+            src={"/not-found.png"}
             alt='not found'
             className='mx-auto mb-8 aspect-[360/326] max-w-[256px] xs:max-w-[370px] lg:mb-12 2xl:mb-16'
           />

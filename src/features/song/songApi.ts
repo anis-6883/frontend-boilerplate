@@ -1,7 +1,7 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { ISong } from "@/types";
-import hitToast from "@/utils/hitToast";
-import { addSong, deleteSong, setValue, } from "./songReducer";
+import hotToast from "@/utils/hotToast";
+import { deleteSong } from "./songReducer";
 
 const songApi = apiSlice.injectEndpoints({
   // @ts-ignore
@@ -13,7 +13,7 @@ const songApi = apiSlice.injectEndpoints({
         if (values.length) return `/song/all?${new URLSearchParams(queries)}`;
         return "/song/all";
       },
-      providesTags: ["song"],
+      providesTags: ["song"]
     }),
     getSingleSong: builder.query({
       query: (id) => `/song/${id}`
@@ -31,10 +31,10 @@ const songApi = apiSlice.injectEndpoints({
         try {
           const res: any = await queryFulfilled;
           console.log(res.status);
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -46,7 +46,7 @@ const songApi = apiSlice.injectEndpoints({
           body: data
         };
       },
-      invalidatesTags: ["song"],
+      invalidatesTags: ["song"]
     }),
     deleteSong: builder.mutation<{ data: { deletedSong: ISong; status: boolean; message: string } }, ISong>({
       query: (id) => {
@@ -62,10 +62,10 @@ const songApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deleteSong({ id: data.deletedSong.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })

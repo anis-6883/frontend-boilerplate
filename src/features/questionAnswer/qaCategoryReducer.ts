@@ -13,7 +13,7 @@ const initialState: qaCategoryState = {
     limit: 10,
     hasNext: false,
     hasPrev: false,
-    totalDocs: 0,
+    totalDocs: 0
   }
 };
 
@@ -29,7 +29,9 @@ const qaCategorySlice = createSlice({
       state.qaCategories = [...state.qaCategories, action.payload];
     },
     updateQaCategory: (state, action: PayloadAction<IQaCategory>) => {
-      state.qaCategories = state.qaCategories.map((item: IQaCategory) => (item.id === action.payload.id ? { ...item, ...action.payload } : item));
+      state.qaCategories = state.qaCategories.map((item: IQaCategory) =>
+        item.id === action.payload.id ? { ...item, ...action.payload } : item
+      );
     },
     deleteQaCategory: (state, action: PayloadAction<{ id: string }>) => {
       state.qaCategories = state.qaCategories.filter((item: IQaCategory) => item.id !== action.payload.id);

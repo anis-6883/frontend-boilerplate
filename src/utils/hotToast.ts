@@ -6,9 +6,9 @@ import toast from "react-hot-toast";
  * @params {String} args.message - the message itself
  *
  */
-const hitToast = (type: string, message: string) => {
+const hotToast = (type: string, message: string) => {
   // @ts-ignore
   toast[type](message, { id: message });
 };
 
-export default hitToast;
+export default hotToast;

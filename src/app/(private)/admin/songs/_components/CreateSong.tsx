@@ -1,20 +1,20 @@
 "use client";
 
 import QuillLoader from "@/components/reactQuill/QuillLoader";
+import Input from "@/components/shared/Form/Input";
+import Switch from "@/components/shared/Form/Switch";
 import { routes } from "@/config/routes";
 import { songFormValidation } from "@/config/validation";
+import { useCreateSongMutation, useGetSingleSongQuery, useUpdateSongMutation } from "@/features/song/songApi";
+import { useGetSongBooksQuery } from "@/features/song/songBookApi";
+import { IOption } from "@/types";
+import hotToast from "@/utils/hotToast";
 import { Form, Formik } from "formik";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Button, Select } from "rizzui";
 import FormBlockWrapper from "../../../../../components/shared/Form/FormBlockWrapper";
-import { useCreateSongMutation, useGetSingleSongQuery, useUpdateSongMutation } from "@/features/song/songApi";
-import Input from "@/components/shared/Form/Input";
-import { useGetSongBooksQuery } from "@/features/song/songBookApi";
-import { useEffect, useState } from "react";
-import { IOption } from "@/types";
-import hitToast from "@/utils/hitToast";
-import Switch from "@/components/shared/Form/Switch";
 
 const QuillEditor = dynamic(() => import("@/components/reactQuill/QuillEditor"), {
   ssr: false,
@@ -38,7 +38,7 @@ export default function CreateSong({ edit, id }: { edit?: boolean; id?: string }
     value: item?.id
   }));
   const handleSubmit = (values: any) => {
-    if (!songBook) hitToast("error", "Please select a song book");
+    if (!songBook) hotToast("error", "Please select a song book");
     values.status = values.status === "1" ? "1" : "0";
     if (edit) {
       updateSong({ id, data: { ...values, songBook: songBook?.value } })

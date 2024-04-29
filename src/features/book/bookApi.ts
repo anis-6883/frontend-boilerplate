@@ -1,6 +1,6 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { IBook } from "@/types";
-import hitToast from "@/utils/hitToast";
+import hotToast from "@/utils/hotToast";
 import { addBook, deleteBook, setValue, updateBook } from "./bookReducer";
 
 const bookApi = apiSlice.injectEndpoints({
@@ -47,10 +47,10 @@ const bookApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addBook(data.newBook));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -68,10 +68,10 @@ const bookApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateBook(data.updatedBook));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -88,15 +88,14 @@ const bookApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deleteBook({ id: data.deleteBook.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })
   })
 });
 
-export const { useGetBooksQuery, useCreateBookMutation, useGetSingleBookQuery, useUpdateBookMutation, useDeleteBookMutation } =
-  bookApi;
+export const { useGetBooksQuery, useCreateBookMutation, useGetSingleBookQuery, useUpdateBookMutation, useDeleteBookMutation } = bookApi;

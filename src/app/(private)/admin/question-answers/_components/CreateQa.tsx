@@ -1,17 +1,17 @@
 "use client";
 
+import Input from "@/components/shared/Form/Input";
+import Switch from "@/components/shared/Form/Switch";
 import { routes } from "@/config/routes";
 import { posterFormValidation } from "@/config/validation";
+import { useCreateQaMutation, useGetSingleQaQuery, useUpdateQaMutation } from "@/features/questionAnswer/qaApi";
+import { useGetQaCategoriesQuery } from "@/features/questionAnswer/qaCategoryApi";
+import { IOption } from "@/types";
+import hotToast from "@/utils/hotToast";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { Button, Select } from "rizzui";
-import Input from "@/components/shared/Form/Input";
 import { useEffect, useState } from "react";
-import { IOption } from "@/types";
-import hitToast from "@/utils/hitToast";
-import Switch from "@/components/shared/Form/Switch";
-import { useGetQaCategoriesQuery } from "@/features/questionAnswer/qaCategoryApi";
-import { useCreateQaMutation, useGetSingleQaQuery, useUpdateQaMutation } from "@/features/questionAnswer/qaApi";
+import { Button, Select } from "rizzui";
 
 export default function CreateQa({ edit, id }: { edit?: boolean; id?: string }) {
   const { data: qaCategories } = useGetQaCategoriesQuery({ paginate: false, status: "1" });
@@ -31,7 +31,7 @@ export default function CreateQa({ edit, id }: { edit?: boolean; id?: string }) 
     value: item?.id
   }));
   const handleSubmit = (values: any) => {
-    if (!qaCategory) hitToast("error", "Please select a QA category");
+    if (!qaCategory) hotToast("error", "Please select a QA category");
     values.status = values.status === "1" ? "1" : "0";
     if (edit) {
       updatePoster({ id, data: { ...values, qaCategory: qaCategory?.value } })

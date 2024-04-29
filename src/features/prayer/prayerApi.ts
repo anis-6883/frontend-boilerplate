@@ -1,7 +1,7 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { IPrayer } from "@/types";
-import hitToast from "@/utils/hitToast";
-import { addPrayer, deletePrayer, setValue, updatePrayer } from "./prayerReducer";
+import hotToast from "@/utils/hotToast";
+import { addPrayer, deletePrayer, updatePrayer } from "./prayerReducer";
 
 const prayerApi = apiSlice.injectEndpoints({
   // @ts-ignore
@@ -13,7 +13,7 @@ const prayerApi = apiSlice.injectEndpoints({
         if (values.length) return `/prayer/all?${new URLSearchParams(queries)}`;
         return "/prayer/all";
       },
-      providesTags: ["prayer"],
+      providesTags: ["prayer"]
     }),
     getSinglePrayer: builder.query({
       query: (id) => `/prayer/${id}`
@@ -33,10 +33,10 @@ const prayerApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addPrayer(data.newPrayer));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -55,10 +55,10 @@ const prayerApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updatePrayer(data.updatedPrayer));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -76,10 +76,10 @@ const prayerApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deletePrayer({ id: data.deletedPrayer.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })

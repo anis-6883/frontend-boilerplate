@@ -35,7 +35,7 @@ export default function VerseTable() {
         accessorFn: (originalRow) => originalRow.content,
         id: "verse",
         header: "Verse"
-      },
+      }
     ],
     []
   );
@@ -51,7 +51,7 @@ export default function VerseTable() {
       deleteRow={deleteVerse as any}
       editRow={routes?.admin?.verse?.edit}
       setQuery={setQuery}
-      searchField="content"
+      searchField='content'
     />
   );
 }

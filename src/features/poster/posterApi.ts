@@ -1,7 +1,7 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { IPoster } from "@/types";
-import hitToast from "@/utils/hitToast";
-import { addPoster, deletePoster, setValue, updatePoster } from "./posterReducer";
+import hotToast from "@/utils/hotToast";
+import { addPoster, deletePoster, setValue } from "./posterReducer";
 
 const posterApi = apiSlice.injectEndpoints({
   // @ts-ignore
@@ -49,10 +49,10 @@ const posterApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addPoster(data.newPoster));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -70,10 +70,10 @@ const posterApi = apiSlice.injectEndpoints({
           const {
             data: { data }
           } = await queryFulfilled;
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -91,14 +91,15 @@ const posterApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deletePoster({ id: data.deletedPoster.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })
   })
 });
 
-export const { useGetPostersQuery, useCreatePosterMutation, useGetSinglePosterQuery, useUpdatePosterMutation, useDeletePosterMutation } = posterApi;
+export const { useGetPostersQuery, useCreatePosterMutation, useGetSinglePosterQuery, useUpdatePosterMutation, useDeletePosterMutation } =
+  posterApi;

@@ -7,7 +7,6 @@ import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { Button, Input } from "rizzui";
 
-
 export default function CreateVerse({ edit, id }: { edit?: boolean; id?: string }) {
   const [createVerse] = useCreateVerseMutation();
   const [updateLanguage] = useUpdateVerseMutation();

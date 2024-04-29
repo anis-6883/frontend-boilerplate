@@ -17,9 +17,8 @@ const statsApi = apiSlice.injectEndpoints({
           console.log(err);
         }
       }
-    }),
+    })
   })
 });
 
-export const { useGetStatsQuery } =
-  statsApi;
+export const { useGetStatsQuery } = statsApi;

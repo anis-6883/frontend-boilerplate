@@ -1,6 +1,6 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { ILanguage } from "@/types";
-import hitToast from "@/utils/hitToast";
+import hotToast from "@/utils/hotToast";
 import { addLanguage, deleteLanguage, setValue, updateLanguage } from "./languageReducer";
 
 const languageApi = apiSlice.injectEndpoints({
@@ -49,10 +49,10 @@ const languageApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addLanguage(data.newLanguage));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -71,10 +71,10 @@ const languageApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateLanguage(data.updatedLanguage));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -93,10 +93,10 @@ const languageApi = apiSlice.injectEndpoints({
           } = await queryFulfilled;
           console.log("dfdkjf", data);
           dispatch(deleteLanguage({ id: data?.deletedLanguage.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })

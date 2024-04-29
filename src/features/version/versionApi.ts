@@ -1,6 +1,6 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { IVersion } from "@/types";
-import hitToast from "@/utils/hitToast";
+import hotToast from "@/utils/hotToast";
 import { addVersion, deleteVersion, setValue, updateVersion } from "./versionReducer";
 
 const versionApi = apiSlice.injectEndpoints({
@@ -49,10 +49,10 @@ const versionApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addVersion(data.newVersion));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -71,10 +71,10 @@ const versionApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateVersion(data.updatedVersion));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -92,15 +92,20 @@ const versionApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deleteVersion({ id: data.deletedVersion.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })
   })
 });
 
-export const { useGetVersionsQuery, useCreateVersionMutation, useGetSingleVersionQuery, useUpdateVersionMutation, useDeleteVersionMutation } =
-  versionApi;
+export const {
+  useGetVersionsQuery,
+  useCreateVersionMutation,
+  useGetSingleVersionQuery,
+  useUpdateVersionMutation,
+  useDeleteVersionMutation
+} = versionApi;

@@ -1,7 +1,7 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { addDailyManna, deleteDailyManna, setValue, updateDailyManna } from "@/features/daily-manna/dailyMannaSlice";
 import { IDailyManna } from "@/types";
-import hitToast from "@/utils/hitToast";
+import hotToast from "@/utils/hotToast";
 const dailyMannaApi = apiSlice.injectEndpoints({
   // @ts-ignore
   overrideExisting: module.hot?.status() === "apply",
@@ -48,10 +48,10 @@ const dailyMannaApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addDailyManna(data.newDailyManna));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -70,10 +70,10 @@ const dailyMannaApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateDailyManna(data.updatedDailyManna));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -92,10 +92,10 @@ const dailyMannaApi = apiSlice.injectEndpoints({
           } = await queryFulfilled;
           console.log("data", data);
           dispatch(deleteDailyManna({ id: data.deletedDailyManna.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })

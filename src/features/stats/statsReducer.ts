@@ -1,15 +1,14 @@
 import { IPagination } from "@/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-type statsType = any
+type statsType = any;
 
 interface statsState {
   stats: statsType[];
 }
 
 const initialState: statsState = {
-  stats: [],
-
+  stats: []
 };
 
 const statsSlice = createSlice({
@@ -19,7 +18,7 @@ const statsSlice = createSlice({
     setValue: (state, action: PayloadAction<{ target: string; value: statsType[] | Boolean | IPagination }>) => {
       // @ts-ignore - Ignore TypeScript error as the types are correct
       state[action.payload.target] = action.payload.value;
-    },
+    }
   }
 });
 

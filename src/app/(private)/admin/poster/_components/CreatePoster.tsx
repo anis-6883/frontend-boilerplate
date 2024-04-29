@@ -1,18 +1,17 @@
 "use client";
 
+import Input from "@/components/shared/Form/Input";
+import Switch from "@/components/shared/Form/Switch";
 import { routes } from "@/config/routes";
 import { posterFormValidation } from "@/config/validation";
-import { Form, Formik } from "formik";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
-import { Button, Select } from "rizzui";
 import { useCreatePosterMutation, useGetSinglePosterQuery, useUpdatePosterMutation } from "@/features/poster/posterApi";
-import Input from "@/components/shared/Form/Input";
-import { useEffect, useState } from "react";
-import { IOption } from "@/types";
-import hitToast from "@/utils/hitToast";
-import Switch from "@/components/shared/Form/Switch";
 import { useGetPosterCategoriesQuery } from "@/features/poster/posterCategoryApi";
+import { IOption } from "@/types";
+import hotToast from "@/utils/hotToast";
+import { Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Button, Select } from "rizzui";
 
 export default function CreatePoster({ edit, id }: { edit?: boolean; id?: string }) {
   const { data: posterCategories } = useGetPosterCategoriesQuery({ paginate: false, status: "1" });
@@ -32,7 +31,7 @@ export default function CreatePoster({ edit, id }: { edit?: boolean; id?: string
     value: item?.id
   }));
   const handleSubmit = (values: any) => {
-    if (!posterCategory) hitToast("error", "Please select a poster book");
+    if (!posterCategory) hotToast("error", "Please select a poster book");
     values.status = values.status === "1" ? "1" : "0";
     if (edit) {
       updatePoster({ id, data: { ...values, posterCategory: posterCategory?.value } })

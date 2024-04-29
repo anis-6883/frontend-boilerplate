@@ -13,7 +13,7 @@ const initialState: prayerState = {
     limit: 10,
     hasNext: false,
     hasPrev: false,
-    totalDocs: 0,
+    totalDocs: 0
   }
 };
 

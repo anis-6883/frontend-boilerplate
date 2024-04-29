@@ -3,15 +3,14 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: IAuthState = {
   user: undefined,
-  forgetPhone: "",
+  forgetPhone: ""
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-
-    setValue: (state, action: PayloadAction<{ target: string, value: IUser | undefined }>) => {
+    setValue: (state, action: PayloadAction<{ target: string; value: IUser | undefined }>) => {
       // @ts-ignore - Ignore TypeScript error as the types are correct
       state[action.payload.target] = action.payload.value;
     },
@@ -20,7 +19,7 @@ const authSlice = createSlice({
     },
     userLoggedOut: (state, action) => {
       state.user = action.payload;
-    },
+    }
   }
 });
 

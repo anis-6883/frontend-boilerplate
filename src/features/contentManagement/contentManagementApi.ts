@@ -1,7 +1,7 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { IContent } from "@/types";
-import hitToast from "@/utils/hitToast";
-import { addContent, deleteContent, setValue, updateContent } from "./contentReducer";
+import hotToast from "@/utils/hotToast";
+import { deleteContent, setValue, updateContent } from "./contentReducer";
 
 const contentManagementApi = apiSlice.injectEndpoints({
   // @ts-ignore
@@ -41,7 +41,7 @@ const contentManagementApi = apiSlice.injectEndpoints({
           body: data
         };
       },
-      invalidatesTags: ["contentManagement"],
+      invalidatesTags: ["contentManagement"]
     }),
     updateContent: builder.mutation<{ data: { updatedContentManagement: IContent; status: boolean; message: string } }, {}>({
       query: ({ id, data }: { id: string; data: IContent }) => {
@@ -58,10 +58,10 @@ const contentManagementApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateContent(data.updatedContentManagement));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -79,10 +79,10 @@ const contentManagementApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deleteContent({ id: data.deletedContentManagement.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })

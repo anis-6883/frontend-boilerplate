@@ -1,6 +1,6 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { IChapter } from "@/types";
-import hitToast from "@/utils/hitToast";
+import hotToast from "@/utils/hotToast";
 import { addChapter, deleteChapter, setValue, updateChapter } from "./chapterReducer";
 
 const chapterApi = apiSlice.injectEndpoints({
@@ -47,10 +47,10 @@ const chapterApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(addChapter(data.newChapter));
-          hitToast("success", "Added");
+          hotToast("success", "Added");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -68,10 +68,10 @@ const chapterApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateChapter(data.updatedChapter));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -88,15 +88,20 @@ const chapterApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deleteChapter({ id: data.deletedChapter.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })
   })
 });
 
-export const { useGetChaptersQuery, useCreateChapterMutation, useGetSingleChapterQuery, useUpdateChapterMutation, useDeleteChapterMutation } =
-  chapterApi;
+export const {
+  useGetChaptersQuery,
+  useCreateChapterMutation,
+  useGetSingleChapterQuery,
+  useUpdateChapterMutation,
+  useDeleteChapterMutation
+} = chapterApi;

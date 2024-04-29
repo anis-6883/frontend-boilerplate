@@ -1,7 +1,7 @@
 import { apiSlice } from "@/features/api/apiSlice";
 import { IVideo } from "@/types";
-import hitToast from "@/utils/hitToast";
-import { deleteVideo, setValue, updateVideo } from "./videoReducer";
+import hotToast from "@/utils/hotToast";
+import { deleteVideo, updateVideo } from "./videoReducer";
 
 const videoApi = apiSlice.injectEndpoints({
   // @ts-ignore
@@ -39,10 +39,10 @@ const videoApi = apiSlice.injectEndpoints({
           } = await queryFulfilled;
           // console.log("dataaa", data);
           // dispatch(addVideo(data));
-          hitToast("success", "Added Videos");
+          hotToast("success", "Added Videos");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error adding");
+          hotToast("error", "Error adding");
         }
       }
     }),
@@ -60,10 +60,10 @@ const videoApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(updateVideo(data.updatedvideo));
-          hitToast("success", "Updated");
+          hotToast("success", "Updated");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error updating");
+          hotToast("error", "Error updating");
         }
       }
     }),
@@ -81,10 +81,10 @@ const videoApi = apiSlice.injectEndpoints({
             data: { data }
           } = await queryFulfilled;
           dispatch(deleteVideo({ id: data.deletedvideo.id! }));
-          hitToast("success", "Deleted");
+          hotToast("success", "Deleted");
         } catch (err) {
           console.log(err);
-          hitToast("error", "Error Deleting");
+          hotToast("error", "Error Deleting");
         }
       }
     })

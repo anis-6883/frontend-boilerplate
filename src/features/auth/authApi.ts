@@ -5,26 +5,11 @@ export const authApi = apiSlice.injectEndpoints({
     adminLogin: builder.mutation({
       query: (data) => {
         return {
-          url: `/admin/login`,
+          url: `/api/v1/admin/login`,
           method: "POST",
           body: data
         };
       }
-      // async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-      //   try {
-      //     const {
-      //       data: { data }
-      //     } = await queryFulfilled;
-
-      //     if (data.accessToken) {
-      //       const { accessToken, user, ...rest } = data;
-      //       dispatch(userLoggedIn({ accessToken, user }));
-      //       return;
-      //     }
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
-      // }
     }),
     getProfile: builder.query({
       query: (id: string) => `/admin/${id}`,

@@ -13,7 +13,7 @@ const initialState: posterCategoryState = {
     limit: 10,
     hasNext: false,
     hasPrev: false,
-    totalDocs: 0,
+    totalDocs: 0
   }
 };
 
@@ -29,7 +29,9 @@ const posterCategorySlice = createSlice({
       state.posterCategories = [...state.posterCategories, action.payload];
     },
     updatePosterCategory: (state, action: PayloadAction<IPosterCategory>) => {
-      state.posterCategories = state.posterCategories.map((item: IPosterCategory) => (item.id === action.payload.id ? { ...item, ...action.payload } : item));
+      state.posterCategories = state.posterCategories.map((item: IPosterCategory) =>
+        item.id === action.payload.id ? { ...item, ...action.payload } : item
+      );
     },
     deletePosterCategory: (state, action: PayloadAction<{ id: string }>) => {
       state.posterCategories = state.posterCategories.filter((item: IPosterCategory) => item.id !== action.payload.id);
