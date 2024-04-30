@@ -1,6 +1,5 @@
 "use client";
 
-import { routes } from "@/config/routes";
 import { useGetOwnProfileMutation } from "@/features/auth/authApi";
 import { setValue, userLoggedOut } from "@/features/auth/authSlice";
 import { useRouter } from "next/navigation";
@@ -16,11 +15,11 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     getOwnProfile(null)
       .then((res: any) => {
         dispatch(setValue({ target: "user", value: res.data.data }));
-        replace(routes.home);
+        // replace(routes.admin.dashboard);
       })
       .catch((err: any) => {
         dispatch(userLoggedOut(undefined));
-        replace(routes.adminLogin);
+        // replace(routes.adminLogin);
       });
   }, [dispatch]);
 

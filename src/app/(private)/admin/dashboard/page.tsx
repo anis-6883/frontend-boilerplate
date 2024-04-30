@@ -1,10 +1,9 @@
 import PageHeader from "@/components/page-header";
 import { routes } from "@/config/routes";
 import { metaObject } from "@/config/site.config";
-import Stats from "./_components/Stats";
 
 const pageHeader = {
-  title: "Admin Dashboard",
+  title: "Dashboard",
   breadcrumb: [
     {
       href: routes.admin.dashboard,
@@ -14,14 +13,13 @@ const pageHeader = {
 };
 
 export const metadata = {
-  ...metaObject("Admin Dashboard")
+  ...metaObject("Book")
 };
 
-export default async function Page() {
+export default function Page() {
   return (
     <>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}></PageHeader>
-      <Stats />
     </>
   );
 }

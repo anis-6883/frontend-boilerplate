@@ -2,7 +2,7 @@ export const routes = {
   home: "/admin",
   adminLogin: "/login",
   admin: {
-    dashboard: "/admin",
+    dashboard: "/admin/dashboard",
     contentManagement: {
       home: "/admin/content-management",
       create: "/admin/content-management/create",

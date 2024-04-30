@@ -16,12 +16,12 @@ export const authApi = apiSlice.injectEndpoints({
       providesTags: ["userProfile"]
     }),
     getOwnProfile: builder.mutation({
-      query: () => "/admin/userProfile"
+      query: () => "/api/v1/admin/profile"
     }),
     logoutUser: builder.mutation({
       query: () => {
         return {
-          url: "/admin/logout",
+          url: "/api/v1/admin/logout",
           method: "POST"
         };
       }

@@ -1,5 +1,6 @@
 "use client";
 
+import { routes } from "@/config/routes";
 import cn from "@/hooks/class-names";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,8 +23,8 @@ export default function Sidebar({ className }: { className?: string }) {
       )}
     >
       <div className='sticky top-0 z-40 bg-gray-0/10 px-6 pb-2 pt-2 dark:bg-gray-100/5 2xl:px-6 2xl:pt-2'>
-        <Link href={"/admin"} aria-label='Site Logo'>
-          <img src='/logo/biman.webp' width={150} height={50} alt='logo' className='m-auto pt-2' />
+        <Link href={routes.admin.dashboard} aria-label='Site Logo'>
+          <img src='/images/logo.png' width={150} height={50} alt='logo' className='m-auto pt-2' />
         </Link>
       </div>
 
