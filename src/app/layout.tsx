@@ -1,10 +1,10 @@
-import AuthProvider from "@/app/auth-provider";
+import AuthProvider from "./providers/auth-provider";
 import { lexendDeca, poppins } from "@/app/fonts";
 import "@/app/globals.css";
 import GlobalDrawer from "@/components/drawer-views/container";
 import GlobalModal from "@/components/modal-views/container";
 import { siteConfig } from "@/config/site.config";
-import ReduxProvider from "@/features/redux-provider";
+import ReduxProvider from "./providers/redux-provider";
 import cn from "@/hooks/class-names";
 import dynamic from "next/dynamic";
 import { Toaster } from "react-hot-toast";
